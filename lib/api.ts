@@ -17,9 +17,19 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-export const fetchNotes = async (page: number = 1, search: string = ''): Promise<FetchNotesResponse> => {
+export const fetchNotes = async (
+  page: number = 1, 
+  search: string = '', 
+  tag?: string
+): Promise<FetchNotesResponse> => {
+  const queryParams: Record<string, any> = { page, search, perPage: 12 };
+  
+  if (tag && tag !== 'all') {
+    queryParams.tag = tag;
+  }
+
   const { data } = await api.get<FetchNotesResponse>('/notes', {
-    params: { page, search, perPage: 12 },
+    params: queryParams,
   });
   return data;
 };

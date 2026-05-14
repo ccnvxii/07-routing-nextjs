@@ -16,7 +16,6 @@ export default async function FilteredNotesPage({ params }: PageProps) {
 
   const queryClient = new QueryClient();
 
-  // Попереднє завантаження на сервері з урахуванням обраного тегу
   await queryClient.prefetchQuery({
     queryKey: ['notes', 1, '', currentTag],
     queryFn: () => fetchNotes(1, '', currentTag),
@@ -24,7 +23,6 @@ export default async function FilteredNotesPage({ params }: PageProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      {/* Передаємо поточний тег у клієнтський компонент */}
       <NotesClient activeTag={currentTag} />
     </HydrationBoundary>
   );
