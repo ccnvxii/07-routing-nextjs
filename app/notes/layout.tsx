@@ -1,13 +1,7 @@
-interface NotesLayoutProps {
+export default function NotesLayout({
+  children,
+}: {
   children: React.ReactNode;
-  modal: React.ReactNode;
-}
-
-export default function NotesLayout({ children, modal }: NotesLayoutProps) {
-  return (
-    <>
-      {children}
-      {modal}
-    </>
-  );
+}) {
+  return <>{children}</>;
 }
